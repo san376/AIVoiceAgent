@@ -1,6 +1,6 @@
 export const ExpertsList=[
     {
-        name:'Lecture on Topic',
+        name:'Topic Base Lecture',
         icon:'/lecture.jpeg'
     },
     {
@@ -18,5 +18,20 @@ export const ExpertsList=[
     {
         name:'Meditation',
         icon:'/meditation.jpeg'
+    }
+]
+
+export const CoachingExpert=[
+    {
+        name:'Raghuveer',
+        avatar:'/t6.jpeg'
+    },
+    {
+        name:'Anitha',
+        avatar:'/t7.jpeg'
+    },
+    {
+        name:'Rajesh',
+        avatar:'/t8.jpeg'
     }
 ]
