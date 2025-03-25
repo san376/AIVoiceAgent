@@ -12,21 +12,38 @@ import { CoachingExpert } from '@/services/Options'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { DialogClose } from '@radix-ui/react-dialog'
+import { useMutation } from 'convex/react'
+import { api } from '@/convex/_generated/api'
+import { LoaderCircle } from 'lucide-react'
 
-function UserInputDialog({ children, ExpertsList }) {
+function UserInputDialog({ children, coachingOption }) {
 
-    const [selectedExpert, setSelectedExpert] = useState(null);
-    const [topic, setTopic] = useState('')
+    const [selectedExpert, setSelectedExpert] = useState();
+    const [topic, setTopic] = useState()
+    const createDiscussionRoom = useMutation(api.DiscussionRoom.CreateNewRoom)
+    const [loading, setLoading] = useState(false)
+
+
+    const OnClickNext = async () => {
+        setLoading(true)
+        const result = await createDiscussionRoom({
+            topic: topic,
+            ExpertsList: ExpertsList?.name,
+            expertName: selectedExpert
+        })
+        console.log(result)
+        setLoading(false)
+    }
 
     return (
         <Dialog>
             <DialogTrigger>{children}</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>{ExpertsList.name}</DialogTitle>
+                    <DialogTitle>{coachingOption.name}</DialogTitle>
                     <DialogDescription asChild>
                         <div className='mt-3'>
-                            <h2 className='text-black'>Enter a topic to master your skills in {ExpertsList.name}</h2>
+                            <h2 className='text-black'>Enter a topic to master your skills in {coachingOption.name}</h2>
                             <Textarea placeholder='Enter your topic here...' className='mt-2'
                                 onChange={(e) => setTopic(e.target.value)} />
 
@@ -51,7 +68,8 @@ function UserInputDialog({ children, ExpertsList }) {
                                 <DialogClose asChild>
                                     <Button variant={'ghost'}>Cancel</Button>
                                 </DialogClose>
-                                <Button disabled={(!topic || !selectedExpert)}>Next</Button>
+                                <Button disabled={(!topic || !selectedExpert || loading)} onClick={OnClickNext}>
+                                    {loading && <LoaderCircle className='animate-spin' />}Next</Button>
                             </div>
                         </div>
                     </DialogDescription>

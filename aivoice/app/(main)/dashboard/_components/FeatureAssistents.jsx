@@ -25,7 +25,7 @@ function FeatureAssistents() {
                     <BlurFade key={Option.icon} delay={0.25} inView>
                         <div key={index} className='p-3 bg-secondary rounded-3xl flex flex-col 
                     justify-center items-center'>
-                            <UserInputDialog ExpertsList={Option}>
+                            <UserInputDialog coachingOption={Option}>
                                 <div key={index} className=' flex flex-col 
                     justify-center items-center'>
                                     <Image src={Option.icon} alt={Option.name}
