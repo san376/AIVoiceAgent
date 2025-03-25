@@ -18,13 +18,16 @@ function FeatureAssistents() {
                 </div>
                 <Button>Profile</Button>
             </div>
-            <div>
+            <div className='grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10 mt-10'>
                 {ExpertsList.map((Option,index)=>(
-                    <div>
+                    <div key={index} className='p-3 bg-secondary rounded-3xl flex flex-col 
+                    justify-center items-center'>
                         <Image src={Option.icon} alt={Option.name}
                         width={150}
                         height={150}
+                        className='h-[70px] w-[70px]'
                         />
+                        <h2 className='mt-2 text-bold'>{Option.name}</h2>
                     </div>
 
                 ))}
